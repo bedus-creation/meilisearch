@@ -44,55 +44,63 @@ pub const DEFAULT_SEMANTIC_RATIO: fn() -> SemanticRatio = || SemanticRatio(0.5);
 #[derive(Clone, Default, PartialEq, Deserr)]
 #[deserr(error = DeserrJsonError, rename_all = camelCase, deny_unknown_fields)]
 pub struct SearchQuery {
-    #[deserr(default, error = DeserrJsonError<InvalidSearchQ>)]
+    #[deserr(default, error = DeserrJsonError < InvalidSearchQ >)]
     pub q: Option<String>,
-    #[deserr(default, error = DeserrJsonError<InvalidSearchVector>)]
+    #[deserr(default, error = DeserrJsonError < InvalidSearchVector >)]
     pub vector: Option<Vec<f32>>,
-    #[deserr(default, error = DeserrJsonError<InvalidHybridQuery>)]
+    #[deserr(default, error = DeserrJsonError < InvalidHybridQuery >)]
     pub hybrid: Option<HybridQuery>,
-    #[deserr(default = DEFAULT_SEARCH_OFFSET(), error = DeserrJsonError<InvalidSearchOffset>)]
+    #[deserr(default = DEFAULT_SEARCH_OFFSET(), error = DeserrJsonError < InvalidSearchOffset >)]
     pub offset: usize,
-    #[deserr(default = DEFAULT_SEARCH_LIMIT(), error = DeserrJsonError<InvalidSearchLimit>)]
+    #[deserr(default = DEFAULT_SEARCH_LIMIT(), error = DeserrJsonError < InvalidSearchLimit >)]
     pub limit: usize,
-    #[deserr(default, error = DeserrJsonError<InvalidSearchPage>)]
+    #[deserr(default, error = DeserrJsonError < InvalidSearchPage >)]
     pub page: Option<usize>,
-    #[deserr(default, error = DeserrJsonError<InvalidSearchHitsPerPage>)]
+    #[deserr(default, error = DeserrJsonError < InvalidSearchHitsPerPage >)]
     pub hits_per_page: Option<usize>,
-    #[deserr(default, error = DeserrJsonError<InvalidSearchAttributesToRetrieve>)]
+    #[deserr(default, error = DeserrJsonError < InvalidSearchAttributesToRetrieve >)]
     pub attributes_to_retrieve: Option<BTreeSet<String>>,
-    #[deserr(default, error = DeserrJsonError<InvalidSearchRetrieveVectors>)]
+    #[deserr(default, error = DeserrJsonError < InvalidSearchRetrieveVectors >)]
     pub retrieve_vectors: bool,
-    #[deserr(default, error = DeserrJsonError<InvalidSearchAttributesToCrop>)]
+    #[deserr(default, error = DeserrJsonError < InvalidSearchAttributesToCrop >)]
     pub attributes_to_crop: Option<Vec<String>>,
-    #[deserr(default, error = DeserrJsonError<InvalidSearchCropLength>, default = DEFAULT_CROP_LENGTH())]
+    #[deserr(
+        default, error = DeserrJsonError < InvalidSearchCropLength >, default = DEFAULT_CROP_LENGTH()
+    )]
     pub crop_length: usize,
-    #[deserr(default, error = DeserrJsonError<InvalidSearchAttributesToHighlight>)]
+    #[deserr(default, error = DeserrJsonError < InvalidSearchAttributesToHighlight >)]
     pub attributes_to_highlight: Option<HashSet<String>>,
-    #[deserr(default, error = DeserrJsonError<InvalidSearchShowMatchesPosition>, default)]
+    #[deserr(default, error = DeserrJsonError < InvalidSearchShowMatchesPosition >, default)]
     pub show_matches_position: bool,
-    #[deserr(default, error = DeserrJsonError<InvalidSearchShowRankingScore>, default)]
+    #[deserr(default, error = DeserrJsonError < InvalidSearchShowRankingScore >, default)]
     pub show_ranking_score: bool,
-    #[deserr(default, error = DeserrJsonError<InvalidSearchShowRankingScoreDetails>, default)]
+    #[deserr(default, error = DeserrJsonError < InvalidSearchShowRankingScoreDetails >, default)]
     pub show_ranking_score_details: bool,
-    #[deserr(default, error = DeserrJsonError<InvalidSearchFilter>)]
+    #[deserr(default, error = DeserrJsonError < InvalidSearchFilter >)]
     pub filter: Option<Value>,
-    #[deserr(default, error = DeserrJsonError<InvalidSearchSort>)]
+    #[deserr(default, error = DeserrJsonError < InvalidSearchSort >)]
     pub sort: Option<Vec<String>>,
-    #[deserr(default, error = DeserrJsonError<InvalidSearchDistinct>)]
+    #[deserr(default, error = DeserrJsonError < InvalidSearchDistinct >)]
     pub distinct: Option<String>,
-    #[deserr(default, error = DeserrJsonError<InvalidSearchFacets>)]
+    #[deserr(default, error = DeserrJsonError < InvalidSearchFacets >)]
     pub facets: Option<Vec<String>>,
-    #[deserr(default, error = DeserrJsonError<InvalidSearchHighlightPreTag>, default = DEFAULT_HIGHLIGHT_PRE_TAG())]
+    #[deserr(
+        default, error = DeserrJsonError < InvalidSearchHighlightPreTag >, default = DEFAULT_HIGHLIGHT_PRE_TAG()
+    )]
     pub highlight_pre_tag: String,
-    #[deserr(default, error = DeserrJsonError<InvalidSearchHighlightPostTag>, default = DEFAULT_HIGHLIGHT_POST_TAG())]
+    #[deserr(
+        default, error = DeserrJsonError < InvalidSearchHighlightPostTag >, default = DEFAULT_HIGHLIGHT_POST_TAG()
+    )]
     pub highlight_post_tag: String,
-    #[deserr(default, error = DeserrJsonError<InvalidSearchCropMarker>, default = DEFAULT_CROP_MARKER())]
+    #[deserr(
+        default, error = DeserrJsonError < InvalidSearchCropMarker >, default = DEFAULT_CROP_MARKER()
+    )]
     pub crop_marker: String,
-    #[deserr(default, error = DeserrJsonError<InvalidSearchMatchingStrategy>, default)]
+    #[deserr(default, error = DeserrJsonError < InvalidSearchMatchingStrategy >, default)]
     pub matching_strategy: MatchingStrategy,
-    #[deserr(default, error = DeserrJsonError<InvalidSearchAttributesToSearchOn>, default)]
+    #[deserr(default, error = DeserrJsonError < InvalidSearchAttributesToSearchOn >, default)]
     pub attributes_to_search_on: Option<Vec<String>>,
-    #[deserr(default, error = DeserrJsonError<InvalidSearchRankingScoreThreshold>, default)]
+    #[deserr(default, error = DeserrJsonError < InvalidSearchRankingScoreThreshold >, default)]
     pub ranking_score_threshold: Option<RankingScoreThreshold>,
 }
 
@@ -249,11 +257,13 @@ impl fmt::Debug for SearchQuery {
 }
 
 #[derive(Debug, Clone, Default, PartialEq, Deserr)]
-#[deserr(error = DeserrJsonError<InvalidHybridQuery>, rename_all = camelCase, deny_unknown_fields)]
+#[deserr(
+    error = DeserrJsonError < InvalidHybridQuery >, rename_all = camelCase, deny_unknown_fields
+)]
 pub struct HybridQuery {
-    #[deserr(default, error = DeserrJsonError<InvalidSearchSemanticRatio>, default)]
+    #[deserr(default, error = DeserrJsonError < InvalidSearchSemanticRatio >, default)]
     pub semantic_ratio: SemanticRatio,
-    #[deserr(default, error = DeserrJsonError<InvalidEmbedder>, default)]
+    #[deserr(default, error = DeserrJsonError < InvalidEmbedder >, default)]
     pub embedder: Option<String>,
 }
 
@@ -312,7 +322,7 @@ impl SearchKind {
                         found: vector_len,
                     },
                 )
-                .into());
+                    .into());
             }
         }
 
@@ -365,57 +375,67 @@ impl SearchQuery {
 #[derive(Debug, Clone, PartialEq, Deserr)]
 #[deserr(error = DeserrJsonError, rename_all = camelCase, deny_unknown_fields)]
 pub struct SearchQueryWithIndex {
-    #[deserr(error = DeserrJsonError<InvalidIndexUid>, missing_field_error = DeserrJsonError::missing_index_uid)]
+    #[deserr(
+        error = DeserrJsonError < InvalidIndexUid >, missing_field_error = DeserrJsonError::missing_index_uid
+    )]
     pub index_uid: IndexUid,
-    #[deserr(default, error = DeserrJsonError<InvalidSearchQ>)]
+    #[deserr(default, error = DeserrJsonError < InvalidSearchQ >)]
     pub q: Option<String>,
-    #[deserr(default, error = DeserrJsonError<InvalidSearchQ>)]
+    #[deserr(default, error = DeserrJsonError < InvalidSearchQ >)]
     pub vector: Option<Vec<f32>>,
-    #[deserr(default, error = DeserrJsonError<InvalidHybridQuery>)]
+    #[deserr(default, error = DeserrJsonError < InvalidHybridQuery >)]
     pub hybrid: Option<HybridQuery>,
-    #[deserr(default = DEFAULT_SEARCH_OFFSET(), error = DeserrJsonError<InvalidSearchOffset>)]
+    #[deserr(default = DEFAULT_SEARCH_OFFSET(), error = DeserrJsonError < InvalidSearchOffset >)]
     pub offset: usize,
-    #[deserr(default = DEFAULT_SEARCH_LIMIT(), error = DeserrJsonError<InvalidSearchLimit>)]
+    #[deserr(default = DEFAULT_SEARCH_LIMIT(), error = DeserrJsonError < InvalidSearchLimit >)]
     pub limit: usize,
-    #[deserr(default, error = DeserrJsonError<InvalidSearchPage>)]
+    #[deserr(default, error = DeserrJsonError < InvalidSearchPage >)]
     pub page: Option<usize>,
-    #[deserr(default, error = DeserrJsonError<InvalidSearchHitsPerPage>)]
+    #[deserr(default, error = DeserrJsonError < InvalidSearchHitsPerPage >)]
     pub hits_per_page: Option<usize>,
-    #[deserr(default, error = DeserrJsonError<InvalidSearchAttributesToRetrieve>)]
+    #[deserr(default, error = DeserrJsonError < InvalidSearchAttributesToRetrieve >)]
     pub attributes_to_retrieve: Option<BTreeSet<String>>,
-    #[deserr(default, error = DeserrJsonError<InvalidSearchRetrieveVectors>)]
+    #[deserr(default, error = DeserrJsonError < InvalidSearchRetrieveVectors >)]
     pub retrieve_vectors: bool,
-    #[deserr(default, error = DeserrJsonError<InvalidSearchAttributesToCrop>)]
+    #[deserr(default, error = DeserrJsonError < InvalidSearchAttributesToCrop >)]
     pub attributes_to_crop: Option<Vec<String>>,
-    #[deserr(default, error = DeserrJsonError<InvalidSearchCropLength>, default = DEFAULT_CROP_LENGTH())]
+    #[deserr(
+        default, error = DeserrJsonError < InvalidSearchCropLength >, default = DEFAULT_CROP_LENGTH()
+    )]
     pub crop_length: usize,
-    #[deserr(default, error = DeserrJsonError<InvalidSearchAttributesToHighlight>)]
+    #[deserr(default, error = DeserrJsonError < InvalidSearchAttributesToHighlight >)]
     pub attributes_to_highlight: Option<HashSet<String>>,
-    #[deserr(default, error = DeserrJsonError<InvalidSearchShowRankingScore>, default)]
+    #[deserr(default, error = DeserrJsonError < InvalidSearchShowRankingScore >, default)]
     pub show_ranking_score: bool,
-    #[deserr(default, error = DeserrJsonError<InvalidSearchShowRankingScoreDetails>, default)]
+    #[deserr(default, error = DeserrJsonError < InvalidSearchShowRankingScoreDetails >, default)]
     pub show_ranking_score_details: bool,
-    #[deserr(default, error = DeserrJsonError<InvalidSearchShowMatchesPosition>, default)]
+    #[deserr(default, error = DeserrJsonError < InvalidSearchShowMatchesPosition >, default)]
     pub show_matches_position: bool,
-    #[deserr(default, error = DeserrJsonError<InvalidSearchFilter>)]
+    #[deserr(default, error = DeserrJsonError < InvalidSearchFilter >)]
     pub filter: Option<Value>,
-    #[deserr(default, error = DeserrJsonError<InvalidSearchSort>)]
+    #[deserr(default, error = DeserrJsonError < InvalidSearchSort >)]
     pub sort: Option<Vec<String>>,
-    #[deserr(default, error = DeserrJsonError<InvalidSearchDistinct>)]
+    #[deserr(default, error = DeserrJsonError < InvalidSearchDistinct >)]
     pub distinct: Option<String>,
-    #[deserr(default, error = DeserrJsonError<InvalidSearchFacets>)]
+    #[deserr(default, error = DeserrJsonError < InvalidSearchFacets >)]
     pub facets: Option<Vec<String>>,
-    #[deserr(default, error = DeserrJsonError<InvalidSearchHighlightPreTag>, default = DEFAULT_HIGHLIGHT_PRE_TAG())]
+    #[deserr(
+        default, error = DeserrJsonError < InvalidSearchHighlightPreTag >, default = DEFAULT_HIGHLIGHT_PRE_TAG()
+    )]
     pub highlight_pre_tag: String,
-    #[deserr(default, error = DeserrJsonError<InvalidSearchHighlightPostTag>, default = DEFAULT_HIGHLIGHT_POST_TAG())]
+    #[deserr(
+        default, error = DeserrJsonError < InvalidSearchHighlightPostTag >, default = DEFAULT_HIGHLIGHT_POST_TAG()
+    )]
     pub highlight_post_tag: String,
-    #[deserr(default, error = DeserrJsonError<InvalidSearchCropMarker>, default = DEFAULT_CROP_MARKER())]
+    #[deserr(
+        default, error = DeserrJsonError < InvalidSearchCropMarker >, default = DEFAULT_CROP_MARKER()
+    )]
     pub crop_marker: String,
-    #[deserr(default, error = DeserrJsonError<InvalidSearchMatchingStrategy>, default)]
+    #[deserr(default, error = DeserrJsonError < InvalidSearchMatchingStrategy >, default)]
     pub matching_strategy: MatchingStrategy,
-    #[deserr(default, error = DeserrJsonError<InvalidSearchAttributesToSearchOn>, default)]
+    #[deserr(default, error = DeserrJsonError < InvalidSearchAttributesToSearchOn >, default)]
     pub attributes_to_search_on: Option<Vec<String>>,
-    #[deserr(default, error = DeserrJsonError<InvalidSearchRankingScoreThreshold>, default)]
+    #[deserr(default, error = DeserrJsonError < InvalidSearchRankingScoreThreshold >, default)]
     pub ranking_score_threshold: Option<RankingScoreThreshold>,
 }
 
@@ -487,25 +507,25 @@ impl SearchQueryWithIndex {
 #[derive(Debug, Clone, PartialEq, Deserr)]
 #[deserr(error = DeserrJsonError, rename_all = camelCase, deny_unknown_fields)]
 pub struct SimilarQuery {
-    #[deserr(error = DeserrJsonError<InvalidSimilarId>)]
+    #[deserr(error = DeserrJsonError < InvalidSimilarId >)]
     pub id: ExternalDocumentId,
-    #[deserr(default = DEFAULT_SEARCH_OFFSET(), error = DeserrJsonError<InvalidSimilarOffset>)]
+    #[deserr(default = DEFAULT_SEARCH_OFFSET(), error = DeserrJsonError < InvalidSimilarOffset >)]
     pub offset: usize,
-    #[deserr(default = DEFAULT_SEARCH_LIMIT(), error = DeserrJsonError<InvalidSimilarLimit>)]
+    #[deserr(default = DEFAULT_SEARCH_LIMIT(), error = DeserrJsonError < InvalidSimilarLimit >)]
     pub limit: usize,
-    #[deserr(default, error = DeserrJsonError<InvalidSimilarFilter>)]
+    #[deserr(default, error = DeserrJsonError < InvalidSimilarFilter >)]
     pub filter: Option<Value>,
-    #[deserr(default, error = DeserrJsonError<InvalidEmbedder>, default)]
+    #[deserr(default, error = DeserrJsonError < InvalidEmbedder >, default)]
     pub embedder: Option<String>,
-    #[deserr(default, error = DeserrJsonError<InvalidSimilarAttributesToRetrieve>)]
+    #[deserr(default, error = DeserrJsonError < InvalidSimilarAttributesToRetrieve >)]
     pub attributes_to_retrieve: Option<BTreeSet<String>>,
-    #[deserr(default, error = DeserrJsonError<InvalidSimilarRetrieveVectors>)]
+    #[deserr(default, error = DeserrJsonError < InvalidSimilarRetrieveVectors >)]
     pub retrieve_vectors: bool,
-    #[deserr(default, error = DeserrJsonError<InvalidSimilarShowRankingScore>, default)]
+    #[deserr(default, error = DeserrJsonError < InvalidSimilarShowRankingScore >, default)]
     pub show_ranking_score: bool,
-    #[deserr(default, error = DeserrJsonError<InvalidSimilarShowRankingScoreDetails>, default)]
+    #[deserr(default, error = DeserrJsonError < InvalidSimilarShowRankingScoreDetails >, default)]
     pub show_ranking_score_details: bool,
-    #[deserr(default, error = DeserrJsonError<InvalidSimilarRankingScoreThreshold>, default)]
+    #[deserr(default, error = DeserrJsonError < InvalidSimilarRankingScoreThreshold >, default)]
     pub ranking_score_threshold: Option<RankingScoreThresholdSimilar>,
 }
 
@@ -550,6 +570,8 @@ pub enum MatchingStrategy {
     All,
     /// Remove query words from the most frequent to the least
     Frequency,
+
+    Optional,
 }
 
 impl Default for MatchingStrategy {
@@ -564,6 +586,7 @@ impl From<MatchingStrategy> for TermsMatchingStrategy {
             MatchingStrategy::Last => Self::Last,
             MatchingStrategy::All => Self::All,
             MatchingStrategy::Frequency => Self::Frequency,
+            MatchingStrategy::Optional => Self::Optional
         }
     }
 }
@@ -1326,7 +1349,8 @@ fn insert_geo_distance(sorts: &[String], document: &mut Document) {
     lazy_static::lazy_static! {
         static ref GEO_REGEX: Regex =
             Regex::new(r"_geoPoint\(\s*([[:digit:].\-]+)\s*,\s*([[:digit:].\-]+)\s*\)").unwrap();
-    };
+    }
+    ;
     if let Some(capture_group) = sorts.iter().find_map(|sort| GEO_REGEX.captures(sort)) {
         // TODO: TAMO: milli encountered an internal error, what do we want to do?
         let base = [capture_group[1].parse().unwrap(), capture_group[2].parse().unwrap()];
@@ -1673,7 +1697,7 @@ mod test {
               "id": "1"
             }"#,
         )
-        .unwrap();
+            .unwrap();
 
         let sorters = &["_geoPoint(50.629973371633746,3.0569447399419567):desc".to_string()];
         let mut document = value.clone();
@@ -1697,7 +1721,7 @@ mod test {
             "_geoPoint(50.629973371633746, 3.0569447399419567):asc",
             "ubu:asc",
         ]
-        .map(|s| s.to_string());
+            .map(|s| s.to_string());
         let mut document = value.clone();
         insert_geo_distance(sorters, &mut document);
         assert_eq!(document.get("_geoDistance"), Some(&json!(0)));
@@ -1710,7 +1734,7 @@ mod test {
             "_geoPoint(100.0, -80.0):asc",
             "chat:asc",
         ]
-        .map(|s| s.to_string());
+            .map(|s| s.to_string());
         let mut document = value.clone();
         insert_geo_distance(sorters, &mut document);
         assert_eq!(document.get("_geoDistance"), Some(&json!(0)));
@@ -1732,7 +1756,7 @@ mod test {
               }
             }"#,
         )
-        .unwrap();
+            .unwrap();
 
         let sorters = &["_geoPoint(50,3):desc".to_string()];
         let mut document = value.clone();
@@ -1748,7 +1772,7 @@ mod test {
               "id": "1"
             }"#,
         )
-        .unwrap();
+            .unwrap();
 
         let sorters = &["_geoPoint(50,3):desc".to_string()];
         let mut document = value.clone();
@@ -1764,7 +1788,7 @@ mod test {
               "id": "1"
             }"#,
         )
-        .unwrap();
+            .unwrap();
 
         let sorters = &["_geoPoint(50,3):desc".to_string()];
         let mut document = value.clone();

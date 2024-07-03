@@ -365,8 +365,16 @@ impl QueryGraph {
             let rank = 1 + last_term_idx - term_idx;
             rank as u16
         };
+
         self.removal_order_for_terms_matching_strategy(ctx, cost_of_term_idx)
     }
+
+    // pub fn removal_order_for_terms_matching_strategy_optional(
+    //     &self,
+    //     ctx: &SearchContext,
+    // )-> Vec<SmallBitmap<QueryNode>>{
+    //
+    // }
 
     pub fn removal_order_for_terms_matching_strategy(
         &self,

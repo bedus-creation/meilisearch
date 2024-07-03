@@ -133,7 +133,7 @@ impl<'ctx> SearchContext<'ctx> {
                         valid_fields,
                         hidden_fields,
                     }
-                    .into());
+                        .into());
                 }
             };
 
@@ -198,6 +198,11 @@ fn resolve_maximally_reduced_query_graph(
             .flat_map(|x| x.iter())
             .collect(),
         TermsMatchingStrategy::Frequency => query_graph
+            .removal_order_for_terms_matching_strategy_frequency(ctx)?
+            .iter()
+            .flat_map(|x| x.iter())
+            .collect(),
+        TermsMatchingStrategy::Optional => query_graph
             .removal_order_for_terms_matching_strategy_frequency(ctx)?
             .iter()
             .flat_map(|x| x.iter())
@@ -807,7 +812,7 @@ fn check_sort_criteria(ctx: &SearchContext, sort_criteria: Option<&Vec<AscDesc>>
                     valid_fields,
                     hidden_fields,
                 }
-                .into());
+                    .into());
             }
             Member::Geo(_) if !sortable_fields.contains("_geo") => {
                 let (valid_fields, hidden_fields) =
@@ -818,7 +823,7 @@ fn check_sort_criteria(ctx: &SearchContext, sort_criteria: Option<&Vec<AscDesc>>
                     valid_fields,
                     hidden_fields,
                 }
-                .into());
+                    .into());
             }
             _ => (),
         }

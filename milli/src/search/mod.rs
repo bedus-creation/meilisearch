@@ -314,6 +314,8 @@ pub enum TermsMatchingStrategy {
     All,
     // remove more frequent word first
     Frequency,
+
+    Optional,
 }
 
 impl Default for TermsMatchingStrategy {

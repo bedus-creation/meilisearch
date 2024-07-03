@@ -51,24 +51,31 @@ async fn simple_search() {
     let server = Server::new().await;
     let index = index_with_documents(&server, &SIMPLE_SEARCH_DOCUMENTS).await;
 
+    // index
+    //     .search(json!({"q": "Captain Marvel", "matchingStrategy": "last", "attributesToRetrieve": ["id"]}), |response, code| {
+    //         snapshot!(code, @"200 OK");
+    //         snapshot!(response["hits"], @r###"[{"id":"3"},{"id":"4"},{"id":"2"},{"id":"6"},{"id":"7"}]"###);
+    //     })
+    //     .await;
+    //
+    // index
+    //     .search(json!({"q": "Captain Marvel", "matchingStrategy": "all", "attributesToRetrieve": ["id"]}), |response, code| {
+    //         snapshot!(code, @"200 OK");
+    //         snapshot!(response["hits"], @r###"[{"id":"3"},{"id":"4"}]"###);
+    //     })
+    //     .await;
+    //
+    // index
+    //     .search(json!({"q": "Captain Marvel", "matchingStrategy": "frequency", "attributesToRetrieve": ["id"]}), |response, code| {
+    //         snapshot!(code, @"200 OK");
+    //         snapshot!(response["hits"], @r###"[{"id":"3"},{"id":"4"},{"id":"5"}]"###);
+    //     })
+    //     .await;
+
     index
-        .search(json!({"q": "Captain Marvel", "matchingStrategy": "last", "attributesToRetrieve": ["id"]}), |response, code| {
+        .search(json!({"q": "Captain Marvel", "matchingStrategy": "optional", "attributesToRetrieve": ["id"]}), |response, code| {
             snapshot!(code, @"200 OK");
             snapshot!(response["hits"], @r###"[{"id":"3"},{"id":"4"},{"id":"2"},{"id":"6"},{"id":"7"}]"###);
-        })
-        .await;
-
-    index
-        .search(json!({"q": "Captain Marvel", "matchingStrategy": "all", "attributesToRetrieve": ["id"]}), |response, code| {
-            snapshot!(code, @"200 OK");
-            snapshot!(response["hits"], @r###"[{"id":"3"},{"id":"4"}]"###);
-        })
-        .await;
-
-    index
-        .search(json!({"q": "Captain Marvel", "matchingStrategy": "frequency", "attributesToRetrieve": ["id"]}), |response, code| {
-            snapshot!(code, @"200 OK");
-            snapshot!(response["hits"], @r###"[{"id":"3"},{"id":"4"},{"id":"5"}]"###);
         })
         .await;
 }
